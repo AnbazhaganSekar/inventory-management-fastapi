@@ -66,23 +66,10 @@ inventory-management-fastapi/
 
 This project uses **environment variables** for secure configuration.
 
-### 🔐 Create `.env` file
-
-```env
-MYSQL_USER=root
-MYSQL_PASSWORD=StrongPassword@123
-MYSQL_HOST=localhost
-MYSQL_PORT=3306
-MYSQL_DB=inventory_db
-```
-
-> ⚠️ Do NOT commit `.env` to version control
-
----
 
 ### ✅ `.env.example` (for sharing)
 
-```env
+```.env.example
 MYSQL_USER=
 MYSQL_PASSWORD=
 MYSQL_HOST=localhost
@@ -135,7 +122,7 @@ pip install -r requirements.txt
 
 ### 4. Configure Environment
 
-Create `.env` file as shown above.
+Create `.env.example` file as shown above.
 
 ---
 
