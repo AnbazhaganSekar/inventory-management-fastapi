@@ -55,7 +55,6 @@ inventory-management-fastapi/
 ├── static/
 │   └── style.css        # Styling
 │
-├── .env                 # Local secrets (NOT committed)
 ├── .env.example         # Environment template
 ├── requirements.txt
 └── README.md
