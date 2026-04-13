@@ -1,0 +1,8 @@
+fastapi
+uvicorn
+sqlalchemy==1.4.49
+greenlet==2.0.2
+pymysql
+jinja2
+python-multipart
+cryptography
