@@ -175,7 +175,7 @@ http://127.0.0.1:8000
 
 * No hardcoded credentials
 * Uses environment variables for secrets
-* `.env` excluded via `.gitignore`
+* `.env.example` excluded via `.gitignore`
 * Recommended to use:
 
   * CI/CD secrets (GitHub Actions / Azure DevOps)
