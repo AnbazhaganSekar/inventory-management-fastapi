@@ -1,48 +1,26 @@
+import os
 from sqlalchemy import create_engine, text
 from sqlalchemy.orm import sessionmaker, declarative_base
+from dotenv import load_dotenv
 
-# ==============================
-# CONFIGURATION
-# ==============================
+load_dotenv()
 
-MYSQL_USER = "root"
-MYSQL_PASSWORD = "2442816%40anbU"   #CHANGE THIS
-MYSQL_HOST = "localhost"
-MYSQL_PORT = "3306"
+MYSQL_USER = os.getenv("MYSQL_USER")
+MYSQL_PASSWORD = os.getenv("MYSQL_PASSWORD")
+MYSQL_HOST = os.getenv("MYSQL_HOST")
+MYSQL_PORT = os.getenv("MYSQL_PORT")
 DB_NAME = "inventory_db"
-
-# ==============================
-# STEP 1: CONNECT TO MYSQL SERVER (NO DB)
-# ==============================
 
 server_engine = create_engine(
     f"mysql+pymysql://{MYSQL_USER}:{MYSQL_PASSWORD}@{MYSQL_HOST}:{MYSQL_PORT}",
-    echo=True
 )
-
-# ==============================
-# STEP 2: CREATE DATABASE IF NOT EXISTS
-# ==============================
 
 with server_engine.begin() as conn:
     conn.execute(text(f"CREATE DATABASE IF NOT EXISTS {DB_NAME}"))
 
-# ==============================
-# STEP 3: CONNECT TO DATABASE
-# ==============================
-
 DATABASE_URL = f"mysql+pymysql://{MYSQL_USER}:{MYSQL_PASSWORD}@{MYSQL_HOST}:{MYSQL_PORT}/{DB_NAME}"
 
-engine = create_engine(
-    DATABASE_URL,
-    echo=True,
-    pool_pre_ping=True
-)
+engine = create_engine(DATABASE_URL, pool_pre_ping=True)
 
-SessionLocal = sessionmaker(
-    autocommit=False,
-    autoflush=False,
-    bind=engine
-)
-
+SessionLocal = sessionmaker(bind=engine)
 Base = declarative_base()
