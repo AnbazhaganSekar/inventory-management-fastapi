@@ -1,57 +1,103 @@
+Below is a **clean, professional, production-grade README** aligned with DevOps, security, and real-world project expectations. It improves structure, adds configuration management, and removes ambiguity.
+
+---
+
 # 📦 Inventory Management System
 
-A full-stack web application built using **FastAPI, MySQL, HTML, and CSS** to manage product inventory, stock levels, and availability.
+A lightweight full-stack inventory management application built with **FastAPI, MySQL, and SQLAlchemy**, designed to demonstrate CRUD operations, environment-based configuration, and secure credential handling.
 
 ---
 
-## 🚀 Features
+## 🚀 Overview
 
-* Add new products
-* View all inventory items
-* Delete products
-* Track quantity and pricing
-* Highlight low stock items
-* Clean table-based UI with background theme
+This application enables users to manage product inventory through a simple web interface. It supports adding, viewing, and deleting products while maintaining a clean separation between application logic, database access, and configuration.
 
 ---
 
-## 🛠️ Tech Stack
+## ✨ Features
 
-* **Backend:** FastAPI
-* **Database:** MySQL
-* **Frontend:** HTML, CSS
-* **ORM:** SQLAlchemy
+* Create and manage inventory items
+* View all products in a structured table
+* Delete products by ID
+* Track product quantity and pricing
+* Highlight low-stock items (UI-level)
+* Environment-based configuration (no hardcoded secrets)
+* Automatic database and table creation
+
+---
+
+## 🛠️ Technology Stack
+
+| Layer       | Technology                   |
+| ----------- | ---------------------------- |
+| Backend     | FastAPI                      |
+| Database    | MySQL                        |
+| ORM         | SQLAlchemy                   |
+| Frontend    | HTML, CSS (Jinja2 Templates) |
+| Config Mgmt | python-dotenv                |
 
 ---
 
 ## 📂 Project Structure
 
 ```
-inventory_project/
+inventory-management-fastapi/
 │
 ├── app/
-│   ├── main.py
-│   ├── database.py
-│   ├── models.py
-│   ├── crud.py
+│   ├── main.py          # FastAPI entry point
+│   ├── database.py      # DB connection & config
+│   ├── models.py        # SQLAlchemy models
+│   ├── crud.py          # DB operations
 │
 ├── templates/
-│   └── index.html
+│   └── index.html       # UI template
 │
 ├── static/
-│   └── style.css
+│   └── style.css        # Styling
 │
+├── .env                 # Local secrets (NOT committed)
+├── .env.example         # Environment template
 ├── requirements.txt
 └── README.md
 ```
 
 ---
 
-## ⚙️ Setup Instructions
+## ⚙️ Configuration (IMPORTANT)
+
+This project uses **environment variables** for secure configuration.
+
+### 🔐 Create `.env` file
+
+```env
+MYSQL_USER=root
+MYSQL_PASSWORD=StrongPassword@123
+MYSQL_HOST=localhost
+MYSQL_PORT=3306
+MYSQL_DB=inventory_db
+```
+
+> ⚠️ Do NOT commit `.env` to version control
+
+---
+
+### ✅ `.env.example` (for sharing)
+
+```env
+MYSQL_USER=
+MYSQL_PASSWORD=
+MYSQL_HOST=localhost
+MYSQL_PORT=3306
+MYSQL_DB=inventory_db
+```
+
+---
+
+## 🧑‍💻 Setup Instructions
 
 ### 1. Clone Repository
 
-```
+```bash
 git clone https://github.com/AnbazhaganSekar/inventory-management-fastapi.git
 cd inventory-management-fastapi
 ```
@@ -60,30 +106,51 @@ cd inventory-management-fastapi
 
 ### 2. Create Virtual Environment
 
-```
+```bash
 python -m venv venv
+```
+
+#### Activate:
+
+**Windows**
+
+```bash
 venv\Scripts\activate
+```
+
+**Linux/Mac**
+
+```bash
+source venv/bin/activate
 ```
 
 ---
 
 ### 3. Install Dependencies
 
-```
+```bash
 pip install -r requirements.txt
 ```
 
 ---
 
-### 4. Run Application
+### 4. Configure Environment
 
-```
+Create `.env` file as shown above.
+
+---
+
+### 5. Run Application
+
+```bash
 uvicorn app.main:app --reload
 ```
 
 ---
 
-### 5. Open in Browser
+### 6. Access Application
+
+Open in browser:
 
 ```
 http://127.0.0.1:8000
@@ -91,26 +158,25 @@ http://127.0.0.1:8000
 
 ---
 
-## 🗄️ Database
+## 🗄️ Database Behavior
 
-* MySQL database: `inventory_db`
-* Tables are created automatically using SQLAlchemy
+* Database: `inventory_db`
+* Automatically created at startup (if not exists)
+* Tables generated via SQLAlchemy ORM
 
 ---
 
-## 📬 API Endpoints
+## 📡 API Endpoints
 
-| Method | Endpoint       | Description       |
-| ------ | -------------- | ----------------- |
-| GET    | `/`            | View all products |
-| POST   | `/add`         | Add new product   |
-| GET    | `/delete/{id}` | Delete product    |
+| Method | Endpoint       | Description          |
+| ------ | -------------- | -------------------- |
+| GET    | `/`            | Fetch all products   |
+| POST   | `/add`         | Add a new product    |
+| GET    | `/delete/{id}` | Delete product by ID |
 
 ---
 
 ## 📌 Sample Data
-
-Example products:
 
 | Product | Category    | Quantity | Price |
 | ------- | ----------- | -------- | ----- |
@@ -119,15 +185,43 @@ Example products:
 
 ---
 
-## 🎯 Key Highlights
+## 🔐 Security Considerations
 
-* Real-time inventory tracking
-* Clean UI with table layout
-* Low stock alert (highlighted in red)
-* Integrated backend and database
+* No hardcoded credentials
+* Uses environment variables for secrets
+* `.env` excluded via `.gitignore`
+* Recommended to use:
+
+  * CI/CD secrets (GitHub Actions / Azure DevOps)
+  * Cloud secret managers (AWS / Azure / GCP)
+
+---
+
+## 🚧 Future Enhancements
+
+* Authentication & authorization (JWT)
+* REST API documentation (Swagger enhancements)
+* Docker & Docker Compose setup
+* Kubernetes deployment (Secrets + ConfigMaps)
+* Role-based access control (RBAC)
+* Inventory alerts & notifications
+
+---
+
+## 🧪 Development Notes
+
+* Designed for learning and demonstration purposes
+* Suitable for extending into DevOps pipelines
+* Can be integrated with CI/CD for automated deployment
 
 ---
 
 ## 👨‍💻 Author
 
-Anbazhagan S
+**Anbazhagan S**
+
+---
+
+## 📄 License
+
+This project is for educational and demonstration purposes.
